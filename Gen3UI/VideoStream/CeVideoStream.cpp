@@ -90,7 +90,6 @@ void CeVideoStream::callBack_send_data(const char *data, int size)
 {
     static bool bb = false;
     if(!bb){
-        printf("wince videostream callback\n");
         bb = true;
     }
 }
@@ -100,7 +99,6 @@ void CeVideoStream::onRawData(void *p, int iLength)
 {
     static bool bb = false;
     if(!bb){
-        printf("wince videostream socket\n");
         bb = true;
     }
 #ifdef TEST_FILE

@@ -44,6 +44,7 @@ void SDLConnector::onConnected()
 
 void SDLConnector::onNetworkBroken()
 {
+    /*
     if (m_pNetwork)
         m_pNetwork->onNetworkBroken();
 
@@ -59,6 +60,9 @@ void SDLConnector::onNetworkBroken()
             break;
         }
     }
+    */
+    m_sdl_is_connected = false;
+    ConnectToSDL(m_pMsgHandler);
 }
 
 bool SDLConnector::IsSDLConnected()
@@ -73,6 +77,7 @@ bool SDLConnector::ConnectToSDL(IMessageInterface * pMsgHandler, INetworkStatus 
 
     ChangeMsgHandler(pMsgHandler);
     //std::vector<IChannel*> m_channels;
+    m_channels.clear();
     m_channels.push_back(&m_VR);
     m_channels.push_back(&m_Vehicle);
     m_channels.push_back(&m_UI);
@@ -85,6 +90,7 @@ bool SDLConnector::ConnectToSDL(IMessageInterface * pMsgHandler, INetworkStatus 
     pthread_create(&thread_connect,NULL,SDLConnector::ConnectThread,this);
     return m_sdl_is_connected;
 }
+
 bool SDLConnector::ConnectToVideoStream(IMessageInterface * pMsgHandler, std::string sIP, int iPort, INetworkStatus * pNetwork)
 {
     m_pNetwork = pNetwork;

@@ -60,6 +60,7 @@ Json::Value g_VehicleInfoJson;
 Json::Value g_StaticResultJson;
 
 Channel::Channel(int startId,std::string Channelname)
+  :m_pSocketManager(NULL)
 {
     m_iIDStart = -1;//register start
     m_iIDRegRequest = startId;//start
@@ -123,11 +124,11 @@ Json::Value Channel::ReadSpecifyJson(const char* fileName)
     if (ifs.is_open()) {
         Json::Reader reader;
         if (!reader.parse(ifs,result,false)) {
-            LOGE("%s read error",fileName);
+            //LOGE("%s read error",fileName);
         }
         ifs.close();
     } else {
-        LOGE("%s can't open",szResult);
+        //LOGE("%s can't open",szResult);
     }
     return result;
 }
@@ -144,7 +145,7 @@ void Channel::onReceiveData(void * pData, int iLength)
 
 void Channel::onMessage(Json::Value &jsonObj)
 {
-    //LOGI("%s:receive:%s",m_sComponentName.c_str(),jsonObj.toStyledString().data());
+    //LOGD("%s:receive:%s",m_sComponentName.c_str(),jsonObj.toStyledString().data());
     bool run = false;
     // id
     if (jsonObj.isMember("id")) {
@@ -176,7 +177,7 @@ void Channel::onMessage(Json::Value &jsonObj)
     }
 
     if (!run) {
-        LOGE("NOT USED");
+        //LOGE("NOT USED");
     }
 }
 
@@ -236,6 +237,9 @@ void Channel::sendError(int resultCode, int id, std::string method, std::string 
 void Channel::SendJson(Json::Value &data)
 {
     //LOGI("---send:%s",data.toStyledString().c_str());
+    if(NULL == m_pSocketManager) {
+        return;
+    }
     Json::FastWriter writer;
     std::string json_file = writer.write(data);
     const char * pStr = json_file.c_str();
@@ -275,14 +279,14 @@ std::string Channel::MethodName(std::string _mode,Json::Value _method)
     std::string mms = _method.asString();
     int pos = mms.find_first_of('.');
     if (std::string::npos == pos) {
-        LOGE("method:find error,%d",pos);
+        //LOGE("method:find error,%d",pos);
         return method;
     }
     mode = mms.erase(pos);
     if (mode == _mode) {
       method = mms.erase(0,pos+1);
     } else {
-        LOGE("mode(%s) is not match mode(%s)",mode.c_str(),_mode.c_str());
+        //LOGE("mode(%s) is not match mode(%s)",mode.c_str(),_mode.c_str());
     }
     return method;
 }
@@ -297,7 +301,7 @@ void Channel::onRequest(Json::Value &request)
     if (m_StaticResult.isMember(ref)) {
         sendResult(id,ref);
     } else {
-      LOGE("%s.%s NOT use",getChannelName().c_str(),ref.c_str());
+      //LOGE("%s.%s NOT use",getChannelName().c_str(),ref.c_str());
     }
 }
 
