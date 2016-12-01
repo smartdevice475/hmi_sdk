@@ -16,6 +16,9 @@ public:
 
     void ShowUI();
 
+    // add by fanqiang
+    void timerEvent(QTimerEvent *event);
+
 public slots:
     void initApps();
 signals:

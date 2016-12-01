@@ -5,7 +5,7 @@
 
 
 MainWindow::MainWindow(AppListInterface * pList,QWidget *parent) : QWidget(parent),
-    m_bInVideoStream(false)
+    m_bInVideoStream(false),m_bsdlStatus(false)
 {
 	m_pList = pList;
 	int title_height=40;
@@ -35,6 +35,14 @@ MainWindow::MainWindow(AppListInterface * pList,QWidget *parent) : QWidget(paren
     m_pNetStatus=new QLabel(this);
     m_pNetStatus->setGeometry(ui_res_width-title_height-margin,inter,title_height-2*inter,title_height-inter*2);
     m_pNetStatus->setStyleSheet(QString::fromUtf8("border-image:url(:/images/wifi.png)"));
+
+    // add by fanqiang
+    m_pSDLStatus=new QLabel(this);
+    m_pSDLStatus->setGeometry(ui_res_width-2*(title_height+margin),inter,title_height-2*inter,title_height-inter*2);
+    //m_pSDLStatus->setStyleSheet(QString::fromUtf8("border-image:url(:/images/home.png)"));
+
+    m_pSDLStatus->setStyleSheet("font: 32px \"Liberation Serif\";color:rgb(255,0,0);background:transparent;border: 0px");
+    m_pSDLStatus->setText("X");
 
     m_pCenter=new QWidget(this);
     m_pCenter->setGeometry(margin,title_height,ui_res_width-2*margin,center_height);
@@ -89,6 +97,7 @@ MainWindow::~MainWindow()
     delete m_pCenter;
     delete m_pMainMenu;
     delete m_pTimer;
+    delete m_pNetStatus;
     /*
     for (int i = 0; i < MENU_MAX; ++i) {
         delete m_pMenuTab[i];
@@ -139,6 +148,16 @@ void MainWindow::onChildAppSelected(int funcId)
 void MainWindow::onUpdateTime()
 {
     m_pTime->setText(QTime::currentTime().toString("HH:mm"));
+
+    if(m_bsdlStatus){
+
+        m_pSDLStatus->setStyleSheet("font: 32px \"Liberation Serif\";color:rgb(0,255,0);background:transparent;border: 0px");
+        m_pSDLStatus->setText("H");
+    }
+    else{
+        m_pSDLStatus->setStyleSheet("font: 32px \"Liberation Serif\";color:rgb(255,0,0);background:transparent;border: 0px");
+        m_pSDLStatus->setText("X");
+    }
 }
 
 /*
@@ -229,6 +248,11 @@ void MainWindow::BackToVideoStream()
 
     }
     */
+}
+
+void MainWindow::SetSDLStatus(bool bConnect)
+{
+    m_bsdlStatus = bConnect;
 }
 
 bool MainWindow::InVideoStream()

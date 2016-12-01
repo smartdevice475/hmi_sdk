@@ -31,6 +31,9 @@ HMI_Initial::HMI_Initial():QObject(NULL)
 
     QTimer::singleShot(500,this,SLOT(initApps()));
     //QFontDatabase::addApplicationFont(":/LiberationSerif-Regular.ttf");
+
+    // add by fanqiang
+    startTimer(1000);
 }
 
 HMI_Initial::~HMI_Initial()
@@ -62,6 +65,11 @@ void HMI_Initial::ShowUI()
 {
     m_uiManager->onAppShow(ID_MAIN);
     m_uiManager->onAppShow(ID_APPLINK);
+}
+
+void HMI_Initial::timerEvent(QTimerEvent *event)
+{
+    m_uiManager->SetSDLStatus(SDLConnector::getSDLConnector()->IsSDLConnected());
 }
 
 #ifdef SDL_SUPPORT_LIB

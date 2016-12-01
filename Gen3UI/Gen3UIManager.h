@@ -44,6 +44,7 @@ public:
 
     // add by fanqiang
     void ShowDeviceList();
+    void SetSDLStatus(bool bConnect);
 
 signals:
     //void finishMainHMI();

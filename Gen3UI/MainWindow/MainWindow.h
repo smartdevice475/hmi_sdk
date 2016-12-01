@@ -38,6 +38,10 @@ public:
     bool InVideoStream();
 
     void BackToVideoStream();
+
+    // add by fanqiang
+    void SetSDLStatus(bool bConnect);
+
 protected:
     virtual void showEvent(QShowEvent * e);
 
@@ -51,7 +55,8 @@ public slots:
     void OnVideoStreamMenuBtnClicked();
 private:
     //VideoStream* videoWidget;
-
+    // add by fanqiang
+    QLabel *m_pSDLStatus;
     QLabel *m_pIcon;
     QLabel *m_pTime;
     QLabel *m_pNetStatus;
@@ -66,6 +71,7 @@ private:
     int  m_AppHeight;
 
     bool m_bInVideoStream;
+    bool m_bsdlStatus;
 };
 
 #endif // APPLINKMENU_H

@@ -315,3 +315,11 @@ void CGen3UIManager::ShowDeviceList()
             m_vUIWidgets[m_iCurUI]->show();
     }
 }
+
+void CGen3UIManager::SetSDLStatus(bool bConnect)
+{
+    if(m_vUIWidgets[ID_MAIN]){
+        MainWindow * pMain = (MainWindow *)m_vUIWidgets[ID_MAIN];
+        pMain->SetSDLStatus(bConnect);
+    }
+}

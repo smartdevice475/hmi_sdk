@@ -17,6 +17,7 @@ public:
 
     virtual void tsSpeak(int VRID, std::string strText) = 0;
     virtual void ShowDeviceList() = 0;
+    virtual void SetSDLStatus(bool bConnect) = 0;
 };
 
 #endif // UIINTERFACE_H
