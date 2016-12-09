@@ -44,7 +44,7 @@ public:
 
     void OnSetMediaClockTimerResponse(int iCode);
 
-    void OnVideoScreenTouch(TOUCH_TYPE touch,int x,int y);
+    void OnVideoScreenTouch(TOUCH_TYPE touch, int x, int y, int id);
 
     Result recvFromServer(Json::Value);
 

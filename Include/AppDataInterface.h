@@ -66,7 +66,7 @@ public:
 
     virtual void OnSetMediaClockTimerResponse(int iCode) = 0;
 
-    virtual void OnVideoScreenTouch(TOUCH_TYPE touch,int x,int y) = 0;
+    virtual void OnVideoScreenTouch(TOUCH_TYPE touch, int x, int y, int id = 0) = 0;
 };
 
 #endif // APPDATAINTERFACE_H

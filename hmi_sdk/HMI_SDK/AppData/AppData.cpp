@@ -1258,7 +1258,7 @@ std::string AppData::getAppName()
     return m_szAppName;
 }
 
-void AppData::OnVideoScreenTouch(TOUCH_TYPE touch,int x,int y)
+void AppData::OnVideoScreenTouch(TOUCH_TYPE touch, int x, int y, int id)
 {
-    ToSDL->OnVideoScreenTouch(touch,x,y);
+    ToSDL->OnVideoScreenTouch(touch,x,y,id);
 }

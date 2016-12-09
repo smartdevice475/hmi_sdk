@@ -236,7 +236,7 @@ void Channel::sendError(int resultCode, int id, std::string method, std::string 
 
 void Channel::SendJson(Json::Value &data)
 {
-    //LOGI("---send:%s",data.toStyledString().c_str());
+    //LOGD("---send:%s",data.toStyledString().c_str());
     if(NULL == m_pSocketManager) {
         return;
     }

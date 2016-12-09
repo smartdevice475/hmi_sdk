@@ -12,6 +12,8 @@
 #include "AppListInterface.h"
 #include <QTimer>
 
+#include "Common/multitouchwidget.h"
+
 #define TEST_FILE
 
 typedef struct dataPackage{
@@ -19,7 +21,7 @@ typedef struct dataPackage{
     int len;
 }DataS;
 
-class CeVideoStream : public QWidget, public IMessageInterface
+class CeVideoStream : public MultiTouchWidget, public IMessageInterface
 {
     Q_OBJECT
 public:
@@ -29,9 +31,9 @@ public:
     void startStream();
     void stopStream();
 
-    void mousePressEvent(QMouseEvent *e);
-    void mouseMoveEvent(QMouseEvent *e);
-    void mouseReleaseEvent(QMouseEvent *e);
+    //void mousePressEvent(QMouseEvent *e);
+    //void mouseMoveEvent(QMouseEvent *e);
+    //void mouseReleaseEvent(QMouseEvent *e);
 public: //IMessageInterface
     Result onRequest(Json::Value) {return RESULT_SUCCESS;}
     void onNotification(Json::Value) {}
@@ -43,6 +45,7 @@ signals:
 public slots:
     void OnClickedMenuBtn();
 
+    void OnMultiTouch(TouchType type,unsigned char id,QPoint ponit);
 private:
     int videoWidth;
     int videoHeight;

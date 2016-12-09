@@ -100,7 +100,7 @@ public:
     void OnVRCancelRecord(void);
 
     //touch event
-    void OnVideoScreenTouch(TOUCH_TYPE touch,int x,int y);
+    void OnVideoScreenTouch(TOUCH_TYPE touch, int x, int y, int id);
 
     void OnSetMediaClockTimerResponse(int iCode,int iRequestId);
 

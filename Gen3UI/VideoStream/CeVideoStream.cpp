@@ -1,7 +1,7 @@
 #include "CeVideoStream.h"
 #include "main.h"
 
-CeVideoStream::CeVideoStream(AppListInterface * pList, QWidget *parent) : QWidget(parent)
+CeVideoStream::CeVideoStream(AppListInterface * pList, QWidget *parent) : MultiTouchWidget(parent)
   ,videoWidth(800),videoHeight(480)
 {
     setWindowFlags(Qt::FramelessWindowHint);
@@ -60,6 +60,9 @@ CeVideoStream::CeVideoStream(AppListInterface * pList, QWidget *parent) : QWidge
     m_pTimer = new QTimer(this);
     m_pTimer->start(1000);
     connect(m_pTimer,SIGNAL(timeout()),this,SLOT(onUpdateTime()));
+
+    connect(this,SIGNAL(MultiTouchSignal(TouchType,unsigned char,QPoint)),
+            SLOT(OnMultiTouch(TouchType,unsigned char,QPoint)));
 }
 
 CeVideoStream::~CeVideoStream()
@@ -111,6 +114,29 @@ void CeVideoStream::OnClickedMenuBtn()
     m_pList->getActiveApp()->OnShowCommand();
 }
 
+void CeVideoStream::OnMultiTouch(TouchType type,unsigned char id,QPoint ponit)
+{
+    int x = ponit.x();
+    int y = ponit.y();
+    x = x*videoWidth/width();
+    y = y*videoHeight/height();
+    switch (type) {
+    case MOUSE_PRESS:
+        m_pList->getActiveApp()->OnVideoScreenTouch(TOUCH_START,x,y,id);
+        break;
+    case MOUSE_MOVE:
+        m_pList->getActiveApp()->OnVideoScreenTouch(TOUCH_MOVE,x,y,id);
+        break;
+    case MOUSE_RELEASE:
+        m_pList->getActiveApp()->OnVideoScreenTouch(TOUCH_END,x,y,id);
+        break;
+    default:
+        break;
+    }
+
+}
+
+/*
 void CeVideoStream::mousePressEvent(QMouseEvent *e)
 {
     int x = e->x();
@@ -142,3 +168,4 @@ void CeVideoStream::mouseReleaseEvent(QMouseEvent *e)
 
     m_pList->getActiveApp()->OnVideoScreenTouch(TOUCH_END,x,y);
 }
+*/

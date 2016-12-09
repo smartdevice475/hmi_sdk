@@ -496,30 +496,26 @@ void SDLConnector::OnVRCancelRecord()
 	m_VR.sendNotification("VR.CancelRecord");
 }
 
-void SDLConnector::OnVideoScreenTouch(TOUCH_TYPE touch,int x,int y)
+void SDLConnector::OnVideoScreenTouch(TOUCH_TYPE touch, int x, int y, int id)
 {
      Json::Value params;
      Json::Value coord;
      Json::Value event;
      Json::Value ts;
-     static int id = 0;
 //     [{"c":[{"x":103,"y":247}]
 
      switch(touch) {
      case TOUCH_START:
-         id++;
          params["type"] = "BEGIN";
-         event[0]["id"] = id;
          break;
      case TOUCH_END:
          params["type"] = "END";
-         event[0]["id"] = id;
          break;
      case TOUCH_MOVE:
-         params["type"] = "MOVE";
-         event[0]["id"] = id;
+         params["type"] = "MOVE";         
          break;
      }
+     event[0]["id"] = id;
      coord[0]["x"] = x;
      coord[0]["y"] = y;
      event[0]["c"] = coord;

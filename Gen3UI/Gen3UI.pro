@@ -12,7 +12,7 @@ TARGET = Gen3UI
 TEMPLATE = lib
 
 CONFIG += ffmpeg
-#CONFIG  += wince  ##wince
+CONFIG  += wince  ##wince
 
 DEFINES += HMIUI_LIBRARY __STDC_CONSTANT_MACROS
 
@@ -62,7 +62,8 @@ SOURCES += \
     VideoStream/JniNative.cpp \
     VideoStream/JniFrame.cpp \
     VideoStream/CeVideoStream.cpp \
-    AppListView/DeviceListView.cpp
+    AppListView/DeviceListView.cpp \
+    Common/multitouchwidget.cpp
 
 HEADERS += \
     Gen3UIManager.h \
@@ -104,7 +105,8 @@ HEADERS += \
     VideoStream/JniNative.h \
     VideoStream/JniFrame.h \
     VideoStream/CeVideoStream.h \
-    AppListView/DeviceListView.h
+    AppListView/DeviceListView.h \
+    Common/multitouchwidget.h
 
 unix {
     target.path = /usr/lib
