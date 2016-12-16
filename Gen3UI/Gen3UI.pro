@@ -7,6 +7,7 @@
 QT       += widgets
 QT += network
 greaterThan(QT_MAJOR_VERSION, 4): QT +=multimedia
+win32:QT += axcontainer
 
 TARGET = Gen3UI
 TEMPLATE = lib
@@ -62,7 +63,12 @@ SOURCES += \
     VideoStream/JniNative.cpp \
     VideoStream/JniFrame.cpp \
     VideoStream/CeVideoStream.cpp \
-    AppListView/DeviceListView.cpp
+    AppListView/DeviceListView.cpp \
+    AudioTrans/AudioInput.cpp \
+    AudioTrans/AudioOutput.cpp \
+    AudioTrans/MspVRAudio.cpp \
+    TextSpeech/textspeech.cpp \
+    TextSpeech/TextToSpeech.cpp
 
 HEADERS += \
     Gen3UIManager.h \
@@ -104,7 +110,12 @@ HEADERS += \
     VideoStream/JniNative.h \
     VideoStream/JniFrame.h \
     VideoStream/CeVideoStream.h \
-    AppListView/DeviceListView.h
+    AppListView/DeviceListView.h \
+    AudioTrans/AudioInput.h \
+    AudioTrans/AudioOutput.h \
+    AudioTrans/MspVRAudio.h \
+    TextSpeech/textspeech.h \
+    TextSpeech/TextToSpeech.h
 
 unix {
     target.path = /usr/lib

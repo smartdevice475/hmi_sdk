@@ -11,7 +11,7 @@
 //#include "UI/Slider/Slider.h"
 //#include "UI/Notify/Notify.h"
 //#include "UI/Common/AppBase.h"
-//#include "UI/TextSpeech/textspeech.h"
+#include "TextSpeech/textspeech.h"
 #include "UIInterface.h"
 #include "AppListInterface.h"
 #include "QMessageBox"
@@ -69,7 +69,7 @@ private:
 #ifdef SDL_SUPPORT_LIB
     //msp_vr_audio *m_MspVR;
 #endif
-    //TextSpeech ts;
+    TextSpeech ts;
     void waitMSec(int ms);
 };
 

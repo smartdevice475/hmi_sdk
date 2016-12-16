@@ -44,6 +44,7 @@
 #include "SliderView/SliderView.h"
 #include "AppListView/DeviceListView.h"
 #include "VideoStream/JniNative.h"
+#include "AudioPassThru/AudioPassView.h"
 
 CGen3UIManager::CGen3UIManager(AppListInterface * pList, QWidget *parent) :
     QWidget(parent)
@@ -84,7 +85,7 @@ void CGen3UIManager::initAppHMI()
     m_vUIWidgets[ID_COMMAND]=new CCommandView(m_pList, pParent);
     m_vUIWidgets[ID_SHOW] = new CMediaShow(m_pList,pParent);
     m_vUIWidgets[ID_ALERT]=new AlertView(m_pList, pParent);
-    m_vUIWidgets[ID_AUDIOPASSTHRU]=NULL;//new CAudioPassThru(m_pList, pParent);
+    m_vUIWidgets[ID_AUDIOPASSTHRU]=new CAudioPassView(m_pList, pParent);
     m_vUIWidgets[ID_CHOICESETVR]=NULL;//new CChoicesetVR(m_pList, pParent);
     m_vUIWidgets[ID_SCROLLMSG] = new CScollMsgView(m_pList, pParent);
     m_vUIWidgets[ID_SLIDER] = new CSliderView(m_pList, pParent);
@@ -271,7 +272,6 @@ void CGen3UIManager::waitMSec(int ms)
 
 void CGen3UIManager::tsSpeak(int VRID, std::string strText)
 {
-    /*
     bool ret = ts.speak(strText.c_str());
 
 
@@ -299,7 +299,6 @@ void CGen3UIManager::tsSpeak(int VRID, std::string strText)
         AppControl->OnPerformAudioPassThru(PERFORMAUDIOPASSTHRU_CANCEL);
         break;
     }
-    */
 }
 
 void CGen3UIManager::OnEndAudioPassThru()

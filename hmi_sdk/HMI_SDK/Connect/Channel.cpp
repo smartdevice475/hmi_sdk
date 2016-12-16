@@ -145,7 +145,7 @@ void Channel::onReceiveData(void * pData, int iLength)
 
 void Channel::onMessage(Json::Value &jsonObj)
 {
-    //LOGD("%s:receive:%s",m_sComponentName.c_str(),jsonObj.toStyledString().data());
+    LOGD("%s:receive:%s",m_sComponentName.c_str(),jsonObj.toStyledString().data());
     bool run = false;
     // id
     if (jsonObj.isMember("id")) {
